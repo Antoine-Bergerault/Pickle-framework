@@ -1,0 +1,15 @@
+{
+    "name": "framework/pickle",
+    "description": "A php framework",
+    "authors": [
+        {
+            "name": "Antoine Bergerault",
+            "email": "antoine.bergerault@gmail.com"
+        }
+    ],
+    "require": {
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    }
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<phpunit colors="true">
+    <testsuite name="My tests">
+        <directory>./tests</directory>
+    </testsuite>
+    <filter>
+        <whitelist proceessUncoveredFromWhitelist="true">
+            <directory suffic=".php">Middlewares/</directory>
+        </whitelist>
+    </filter>
+</phpunit>

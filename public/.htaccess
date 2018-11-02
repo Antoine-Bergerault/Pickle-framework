@@ -1,0 +1,30 @@
+<FilesMatch ".*\.(css|js)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+<Files *.php>
+    Order Deny,Allow
+    Deny from all
+    Allow from 127.0.0.1
+</Files>
+
+<Files index.php>
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+<IfModule mod_expires.so>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 days"
+  ExpiresByType text/css "access plus 1 hours"
+  ExpiresByType text/js "access plus 1 days"
+  ExpiresByType image/jpg "access plus 2 days"
+  ExpiresByType image/jpeg "access plus 2 days"
+  ExpiresByType image/png "access plus 2 days"
+  ExpiresByType image/gif "access plus 2 days
+</IfModule>
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [NC,L]
