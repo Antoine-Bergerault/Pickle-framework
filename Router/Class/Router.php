@@ -1,10 +1,9 @@
 <?php
 namespace Pickle\Engine;
-use Pickle\Engine\Route;
 
 class Router{
     
-    static $routes = [];//list of routes
+    static $routes = ['GET' => [], 'POST' => []];//list of routes
     static $default = false;//default route
     static $ajaxurl = '/load';
 

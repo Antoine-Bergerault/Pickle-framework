@@ -21,7 +21,7 @@ class Route{
      * @param $path string
      * @param $callback function || string
      */
-    public function __construct($path, $arr = []){//set the callback and path
+    public function __construct(string $path, $arr = []){//set the callback and path
         if(!is_array($arr)){
             $arr = [
                 'script' => $arr

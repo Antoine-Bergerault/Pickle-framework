@@ -26,7 +26,7 @@ class Extras{
         
         $root = trim($root, '/');
 
-        $elem .= '<script>for (var elem of document.querySelectorAll(\'.flash-delete\')){
+        $elem .= '<script>for (let elem of document.querySelectorAll(\'.flash-delete\')){
                             elem.addEventListener(\'click\',function(){
                                 this.parentElement.style.display = \'none\';
                             });

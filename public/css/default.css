@@ -23,7 +23,7 @@ button{
     color: black;
     cursor: pointer;
     padding: 2px;
-    border: .5px;
+    border: 1px;
 }
 .center-absolute{
     display: block;

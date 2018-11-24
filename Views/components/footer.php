@@ -62,7 +62,7 @@ $(function(){
         $(element).removeAttr('data-global-key');
         
         $(element).removeAttr('data-explore');
-        $(element).removeAttr('data-if')
+        $(element).removeAttr('data-if');
 
         if($(element).hasClass('data')){
             $(element).removeClass('data');
@@ -146,7 +146,6 @@ $(function(){
         }
 
         clearData(element);
-        return;
 
     }
 
@@ -160,7 +159,7 @@ $(function(){
         })
     }
 
-    request()
+    request();
 
     <?php if( $GLOBALS['refresh'] != false): ?>
 

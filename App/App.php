@@ -231,6 +231,10 @@ class App{
         self::save('debug', debug($v));
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     */
     static function middleware($name){
         if(!isset(self::$middlewares[$name])){
             require_once(__DIR__.'/../Middlewares/'.ucfirst($name).'Middleware.php');

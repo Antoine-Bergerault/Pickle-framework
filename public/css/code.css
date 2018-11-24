@@ -1,0 +1,80 @@
+.code{
+    height: auto;
+    width: 100%;
+    padding: 10px;
+    background: rgb(33, 35, 58);
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    overflow: auto;
+}
+.code code{
+    height: 100%;
+    width: 100%;
+    color: #fff;
+}
+.name-code{
+    height: auto;
+    width: 100%;
+    padding: 10px;
+    background: rgba(68, 68, 70, 0.884);
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    color: #fff;
+    font-style: italic;
+}
+.return-code{
+    height: auto;
+    width: 100%;
+    padding: 10px;
+    background: rgba(128, 189, 128, 0.884);
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    color: #fff;
+}
+.return-code span{
+    color: #ff0000;
+}
+
+.return-code .white{ color: #fff; }
+span.class{
+    color: rgba(217, 0, 255, 0.87);
+}
+span.method{
+    color: rgb(255, 36, 36);
+}
+span.function{
+    color: rgb(255, 36, 36);
+}
+span.string{
+    color: rgb(255, 165, 81);
+}
+span.function-keyword{
+    color: #6dc9ff;
+}
+span.new-keyword{
+    color: #8a2d02;
+}
+span.return{
+    color: #1cff2f;
+}
+span.comment{
+    color: #00ff1575;
+}
+span.param{
+    color: rgba(124, 148, 255, 0.506);
+}
+span.class-keyword{
+    color: #b11ca4;
+}
+span.method-accessible-keyword{
+    color: #7c97d1;
+}
+span.if-keyword, span.else-keyword{
+    color: #fcd03f;
+}
+span.boolean{
+    color: #f05555;
+}
+span.number{
+    color: #fcd03f;
+}

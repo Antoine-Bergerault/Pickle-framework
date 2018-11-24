@@ -1,7 +1,7 @@
 <?php
 /** @var string $url */
 
-define('ROOT', __DIR__.'/../');
+define('ROOT', dirname(__DIR__));
 
 use \Pickle\Engine\App;
 use \Pickle\Engine\Router;
@@ -22,5 +22,3 @@ App::activeMiddlewares(['mustBeConnected']);
 
 echo Router::run($url);
 App::extra();
-
-?>
