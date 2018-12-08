@@ -18,7 +18,10 @@ date_default_timezone_set('UTC');
 
 require('../autoload.php');
 
-App::activeMiddlewares(['mustBeConnected']);
+//App::activeMiddlewares(['mustBeConnected']);
 
 echo Router::run($url);
+
 App::extra();
+
+App::getEnvironnementTools();

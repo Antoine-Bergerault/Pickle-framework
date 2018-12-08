@@ -111,8 +111,10 @@ function str_random($lenght){
 }
 
 function listen(){
-    ob_get_clean();
-    ob_start();
+    if(ENV != 'DEV'){
+        ob_get_clean();
+        ob_start();
+    }
 }
 
 function fillTemplate($name, $arr = []){
@@ -145,6 +147,10 @@ function loadTemplateScripts($scripts){
     foreach ($scripts as $script) {
         loadCSS($script);
     }
+}
+
+function standard_format($date){
+    return date_format(new DateTime($date), 'jS F Y');
 }
 
 ?>

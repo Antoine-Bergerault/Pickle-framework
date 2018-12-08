@@ -69,6 +69,7 @@ class Router{
             foreach(self::$routes[$method] as $route){
                 if($route->match($path) == true){
                     $arr = $route->callback();
+                    \Pickle\Engine\App::disableComponents();
                     return json_encode($arr);
                 }
             }

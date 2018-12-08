@@ -10,4 +10,6 @@ class Config{
 
     static $CacheDirectory = "/temp";//the directory where the cache will be stored
 
+    static $env = 'DEV';//DEV or PROD
+
 }
