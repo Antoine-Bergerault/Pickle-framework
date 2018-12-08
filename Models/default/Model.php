@@ -51,6 +51,7 @@ class Model{
 
     public function from($table){//use it especially for inner join
         $this->params["FROM"] = $table;
+        return $this;
     }
 
     //return the first occurence
