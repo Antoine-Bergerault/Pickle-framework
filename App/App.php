@@ -1,5 +1,6 @@
 <?php
 namespace Pickle\Engine;
+use Pickle\Tools\Config;
 
 class App{
 
@@ -7,6 +8,8 @@ class App{
     static $url = null;//variable to store the url
     static $extras = [];//extras
     static $middlewares = [];
+    static $modules = [];
+    static $components = true;
 
     static function load(){//equivalent of __construct
 
@@ -25,26 +28,36 @@ class App{
             self::fromcookie();
         }
         self::seturl();//initialize the $url
+        
+        $header = isset($_SERVER['HTTP_X_REQUESTED_WITH']) ? $_SERVER['HTTP_X_REQUESTED_WITH'] : null;
+        define('ENV', ($header === 'XMLHttpRequest') ? null : Config::$env);
+        if ($header === 'XMLHttpRequest'){
+            self::disableComponents();
+        }
+
         self::load_extra();
         self::autoload();
     }
 
     static function load_extra(){
-        
-        require_once(__DIR__.'/Extras.php');
-        $Extras = new Extras();
+        if (self::$components == true) {
+            require_once(__DIR__.'/Extras.php');
+            $Extras = new Extras();
 
-        if(self::isset_session('flash')){
-            echo $Extras->flashes(self::get('flash'));
-            self::destroy('flash');
+            if(self::isset_session('flash')){
+                echo $Extras->flashes(self::get('flash'));
+                self::destroy('flash');
+            }
         }
     }
 
     static function extra(){
-        require_once(__DIR__.'/Extras.php');
-        $Extras = new Extras();
-        if(self::isset_session('debug')){
-            echo $Extras->debug(self::get('debug'));
+        if (self::$components == true) {
+            require_once(__DIR__.'/Extras.php');
+            $Extras = new Extras();
+            if(self::isset_session('debug')){
+                echo $Extras->debug(self::get('debug'));
+            }
         }
     }
 
@@ -247,6 +260,23 @@ class App{
         }
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     */
+    static function module($name)
+    {
+        if (!isset(self::$modules[$name])) {
+            require_once(__DIR__ . '/../Modules/' . ucfirst($name) . 'Module.php');
+            $name = ucfirst($name) . 'Module';
+            $module = new $name();
+            self::$modules[$name] = $module;
+            return $module;
+        } else {
+            return self::$modules[$name];
+        }
+    }
+
     static function activeMiddlewares($arr){
         if(!is_array($arr)){
             $arr = [$arr];
@@ -279,6 +309,24 @@ class App{
                 require_once __DIR__."/../Controllers/$name.php";
             }
         });
+    }
+
+    static function getEnvironnementTools($env = null){
+        if(self::$components == true){
+            if($env == null){
+                $env = ENV;
+            }
+            include __DIR__.'/Builders/AppBuilder.php';
+            if($env == 'DEV'){
+                $Builder = new \Pickle\Engine\Builder\AppBuilder();
+                $Builder->loadEnvironnement($env);
+                $Builder->print();
+            }
+        }
+    }
+
+    static function disableComponents(){
+        self::$components = false;
     }
 
 }
