@@ -1,9 +1,9 @@
 <?php
 
-require('Tools/config.php');//load the configuration
-require('App/App.php');//load app
-require('App/Cache.php');//load cache
-require('Router/Class/Route.php');//class for the routes
-require('Router/Class/Router.php');//class for the router
-require('Router/web.php');//assign the url
-require('Tools/function.php');//functions
+require('core/Tools/config.php');//load the configuration
+require('core/App/App.php');//load app
+require('core/App/Cache.php');//load cache
+require('core/Router/Class/Route.php');//class for the routes
+require('core/Router/Class/Router.php');//class for the router
+require('core/Router/web.php');//assign the url
+require('core/Tools/function.php');//functions

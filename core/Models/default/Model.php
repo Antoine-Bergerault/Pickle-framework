@@ -2,7 +2,7 @@
 namespace Pickle;
 
 //this is a class for database request
-require ROOT.'/Tools/db.php';
+require ROOT.'/core/Tools/db.php';
 use Pickle\Tools\DB;
 use Pickle\Tools\Config;
 

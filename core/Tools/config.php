@@ -12,4 +12,6 @@ class Config{
 
     static $env = 'DEV';//DEV or PROD
 
+    static $devmail = null;
+
 }
