@@ -16,7 +16,33 @@ if(isset($_GET['url'])){//set the url
 
 date_default_timezone_set('UTC');
 
-require('../autoload.php');
+require(ROOT.'/autoload.php');
+
+if(ENV == 'PROD'){
+    register_shutdown_function('fatal_handler');
+    function fatal_handler(){
+        $errfile = "unknown file";
+        $errstr = "shutdown";
+        $errno = E_CORE_ERROR;
+        $errline = 0;
+
+        $error = error_get_last();
+
+        if ($error !== null) {
+            $errno = $error["type"];
+            $errfile = $error["file"];
+            $errline = $error["line"];
+            $errstr = $error["message"];
+
+            $subject = 'New error';
+            $message = 'This error occurs when trying to load the page : ' . url($url) . '<br>';
+            $message .= "$errno : $errstr in <strong>$errfile</strong> on line <strong>$errline</strong>";
+
+            require ROOT . '/core/App/Email.php';
+            Pickle\Engine\Email::send($subject, $message, Pickle\Tools\Config::$devmail);
+        }
+    }
+}
 
 //App::activeMiddlewares(['mustBeConnected']);
 
