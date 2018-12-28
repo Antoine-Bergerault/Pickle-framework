@@ -4,6 +4,14 @@
 - PHP 7
 - MySQL
 
+## Installation
+### Command line installation
+`git clone https://github.com/Antoine-Bergerault/Pickle-framework.git`
+### You can also download it with the download button of GitHub
+
+### Install and update composer dependencies
+Run `composer install` and `composer update` while pointing the framework folder
+
 ## How to use this framework ?
 Install all the files and lauch your local server.
 With your browser, open the public directory.
