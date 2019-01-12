@@ -1,4 +1,5 @@
 # Pickle framework
+documentation : https://antoine-bergerault.github.io/pickle-doc/index.html
 
 ## Requirements
 - PHP 7
