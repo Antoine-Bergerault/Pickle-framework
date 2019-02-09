@@ -6,8 +6,9 @@ use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
 require 'vendor/autoload.php';
+require_once ROOT . '/core/App/Interfaces/EmailInterface.php';
 
-class Email{
+class Email implements \EmailInterface{
 
     static $name = "Pickle framework";
     static $email = "noreply@youremail.fr";
