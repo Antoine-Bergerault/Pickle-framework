@@ -17,7 +17,7 @@ function view($name, $data = null){//return the correct view
     }
     require(ROOT."/Views/$name.php");
 }
-function url($path = false){//get the route for the root of the website
+function url($path = false, $params = false){//get the route for the root of the website
     if(Router::$default != false && $path == false){
         $path = Router::$default;
     }else if(Router::$default == false && $path == false){
@@ -30,16 +30,21 @@ function url($path = false){//get the route for the root of the website
     }
 
     $url = str_replace(' ','%20',$url);
+    $url = explode('?', $url);
+    $url = $url[0];
 
-    $root = (isset($_SERVER['HTTPS']) ? "https://" : "http://"). "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    $root = (isset($_SERVER['HTTPS']) ? "https://" : "http://"). "$_SERVER[HTTP_HOST]".parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     
     if($url != null){
         $root = explode($url, $root);
         $root = $root[0];
     }
-    
     $root = trim($root, '/');
     $route_path = $root.$path;
+    if($params){
+        $route_path.= (str_replace(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '', $_SERVER['REQUEST_URI']));
+    }
+
     return $route_path;
 }
 
