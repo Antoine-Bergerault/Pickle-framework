@@ -2,7 +2,10 @@
 namespace Pickle\Engine;
 use Pickle\Tools\Config;
 
-class App{
+require 'config.php';
+\AppConfig::load();
+
+class App extends Session{
 
     static $user = false;//variable to store the user
     static $url = null;//variable to store the url
@@ -12,7 +15,6 @@ class App{
     static $components = true;
 
     static function load(){//equivalent of __construct
-
         self::session();//create a session if doesn't exist
         if(isset($_SESSION) && isset($_SESSION['user'])){
             $usr = $_SESSION['user'];//set the variable with the session content
@@ -59,19 +61,6 @@ class App{
                 echo $Extras->debug(self::get('debug'));
             }
         }
-    }
-
-    static function session(){//start a session if it is not already done
-
-        if(session_status() == PHP_SESSION_NONE){
-            session_start();
-        }
-        return $_SESSION;
-
-    }
-
-    static function clear_session(){
-        $_SESSION = [];
     }
 
     static function connect($usr, $remind = false){//connect the app to the user passed in parameter as $usr
@@ -201,45 +190,6 @@ class App{
         return false;
     }
 
-
-    static function save($key,$val = true){
-        self::session();
-        $_SESSION[$key] = $val;
-        return true;
-    }
-
-    static function get($key){
-        self::session();
-        if(isset($_SESSION[$key])){
-            return $_SESSION[$key];
-        }
-        return false;
-    }
-
-    static function destroy($key){
-        self::session();
-        if(isset($_SESSION[$key])){
-            unset($_SESSION[$key]);
-        }
-    }
-
-    static function add($key, $val){
-        self::session();
-        if(!self::isset_session($key)){
-            self::save($key, []);
-        }
-        if(!is_array(self::get($key))){
-            self::save($key, [self::get($key)]);;
-        }
-        $arr = self::get($key);
-        $arr[] = $val;
-        self::save($key, $arr);
-    }
-
-    static function isset_session($key){
-        return isset($_SESSION[$key]);
-    }
-
     static function debug($v){
         self::save('debug', debug($v));
     }
@@ -264,8 +214,7 @@ class App{
      * @param $name
      * @return mixed
      */
-    static function module($name)
-    {
+    static function module($name){
         if (!isset(self::$modules[$name])) {
             require_once(__DIR__ . '/../Modules/' . ucfirst($name) . 'Module.php');
             $name = ucfirst($name) . 'Module';
