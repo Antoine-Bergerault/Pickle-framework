@@ -76,7 +76,7 @@ class Router{
         }
 
         if(self::$default != false){//if there is a default and no matches
-            redirect(url(self::$default, $url));//redirect to the default path
+            redirect(url(self::$default));//redirect to the default path
             return false;
         }else{
             return view('errors/error404');
