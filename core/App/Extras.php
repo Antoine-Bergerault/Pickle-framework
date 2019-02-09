@@ -17,8 +17,8 @@ class Extras{
         $root = (isset($_SERVER['HTTPS']) ? "https://" : "http://"). "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         
         $url = '/';
-        if(isset($_GET['url'])){//set the url
-            $url = '/'.$_GET['url'];
+        if(isset($_GET['picklerewriteurl'])){//set the url
+            $url = '/'.$_GET['picklerewriteurl'];
         }
 
         $root = explode($url, $root);

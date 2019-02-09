@@ -25,8 +25,8 @@ function url($path = false){//get the route for the root of the website
     }
 
     $url = null;
-    if(isset($_GET['url'])){
-        $url = '/'.$_GET['url'];
+    if(isset($_GET['picklerewriteurl'])){
+        $url = '/'.$_GET['picklerewriteurl'];
     }
 
     $url = str_replace(' ','%20',$url);

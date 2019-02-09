@@ -10,8 +10,8 @@ ob_start('ob_gzhandler');
 register_shutdown_function('ob_end_flush');
 
 $url = '/';
-if(isset($_GET['url'])){//set the url
-    $url = '/'.$_GET['url'];
+if(isset($_GET['picklerewriteurl'])){//set the url
+    $url = '/'.$_GET['picklerewriteurl'];
 }
 
 date_default_timezone_set('UTC');
