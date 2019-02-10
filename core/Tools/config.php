@@ -14,4 +14,6 @@ class Config{
 
     static $devmail = null;
 
+    static $website = 'localhost/pickle';
+
 }

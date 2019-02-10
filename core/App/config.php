@@ -3,7 +3,15 @@
 class AppConfig{
 
     static $uses = [
-        'Session' => 'default/Session'
+        /**
+        Class(es)
+        */
+        'Session' => 'default/Session',
+
+        /**
+         * Trait(s)
+         */
+        'UserManagement' => 'default/UserManagement'
     ];
 
     static function load(){
