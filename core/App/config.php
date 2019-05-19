@@ -11,7 +11,8 @@ class AppConfig{
         /**
          * Trait(s)
          */
-        'UserManagement' => 'default/UserManagement'
+        'UserManagement' => 'default/UserManagement',
+        'SessionChecker' => 'SessionChecker'
     ];
 
     static function load(){
