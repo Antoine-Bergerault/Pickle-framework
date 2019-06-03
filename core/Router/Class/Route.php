@@ -7,6 +7,7 @@ class Route{
     public $path = null;//path to access this route
     public $callback;//function used as callback
     public $matches = [];//advanced matches rules
+    public $associativesMatches = [];
     public $params = [];
     public $cond = false;
     public $view = false;
@@ -15,6 +16,8 @@ class Route{
     public $include = false;
     public $data = [];
     public $cache = false;
+    public $amp = false;
+    public $mobileversion = false;
 
     /**
      * Route constructor.
@@ -34,7 +37,8 @@ class Route{
             'name' => trim($path,'/'),
             'include' => false,
             'data' => [],
-            'cache' => false
+            'cache' => false,
+            'amp' => false
         ],$arr);
         $this->path = $path;
         $this->view = $arr['view'];
@@ -44,6 +48,7 @@ class Route{
         $this->include = $arr['include'];
         $this->data = $arr['data'];
         $this->cache = $arr['cache'];
+        $this->mobileversion = $arr['amp'];
         return $this;
     }
 
@@ -83,6 +88,7 @@ class Route{
         if($this->path == false){
             return false;
         }
+        $this->associativesMatches = [];
         $url = rtrim($url,'/').'/';
         $this->path = rtrim($this->path,'/').'/';
         $path = preg_replace_callback('#{([\w]+)}#', [$this, 'checkParams'], $this->path);
@@ -92,10 +98,13 @@ class Route{
         }
         array_shift($matches);
         $this->matches = $matches;
+        $this->associativesMatches = array_combine($this->associativesMatches, $this->matches);
         return true;
     }
 
     private function checkParams($match){//check if the parameters are good
+
+        $this->associativesMatches[] = $match[1];
 
         if(isset($this->params[$match[1]])){
             return '('.$this->params[$match[1]].')';
@@ -133,6 +142,15 @@ class Route{
         return 'scripts/'.$name;
     }
 
+    public function isAmpAvailable(){
+        return $this->mobileversion;
+    }
+
+    public function setAmp($val, $path){
+        $this->amp = $val;
+        $this->move($path);
+        return $this;
+    }
 
 }
 

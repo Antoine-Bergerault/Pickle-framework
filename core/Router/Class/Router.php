@@ -6,6 +6,7 @@ class Router{
     static $routes = ['GET' => [], 'POST' => []];//list of routes
     static $default = false;//default route
     static $ajaxurl = '/load';
+    static $amp = false;
 
     static function get($path, $arr = []){//add a route with the get method
         $route = new Route($path, $arr);
@@ -42,9 +43,11 @@ class Router{
     static function run($url){//check if a route correspond with the url
         $method = $_SERVER['REQUEST_METHOD'];
         if(isset(self::$routes[$method])) {
+            $GLOBALS['amp'] = false;
             for($i = 0; $i < sizeof(self::$routes[$method]); $i++) {
                 $route = self::$routes[$method][$i];
                 if($route->match($url) == true){
+                    $GLOBALS['mobileversion'] = $route->isAmpAvailable();
                     if($route->view == false){
                         return $route->callback();
                     }
@@ -53,10 +56,10 @@ class Router{
                     $GLOBALS['data'] = $data;
                     $GLOBALS['refresh'] = $refresh;
                     if($route->include == true){
-                        return view($route->view, array_merge($route->callback(), $route->data));
+                        return view($route->view, array_merge($route->callback(), $route->data, $route->associativesMatches));
                     }
                     \Pickle\Engine\App::save('AJAX_FROM_ROUTE', $route->path);
-                    return view($route->view, array_merge(compact(['data','refresh']), $route->data));
+                    return view($route->view, array_merge(compact(['data','refresh']), $route->data, $route->associativesMatches));
                 }
             }
         }
@@ -75,6 +78,32 @@ class Router{
             }
         }
 
+        if(self::$amp != false){
+            if(isset(self::$routes[$method])) {
+                $GLOBALS['amp'] = true;
+                for($i = 0; $i < sizeof(self::$routes[$method]); $i++) {
+                    $route = self::$routes[$method][$i];
+                    if($route->isAmpAvailable()){
+                        $route->setAmp(true, self::$amp);
+                        if($route->match($url) == true){
+                            if($route->view == false){
+                                return $route->callback();
+                            }
+                            $data = $route->callback != false && $route->include == false;
+                            $refresh = $route->refresh;
+                            $GLOBALS['data'] = $data;
+                            $GLOBALS['refresh'] = $refresh;
+                            if($route->include == true){
+                                return view($route->view, array_merge($route->callback(), $route->data, $route->associativesMatches));
+                            }
+                            \Pickle\Engine\App::save('AJAX_FROM_ROUTE', $route->path);
+                            return view($route->view, array_merge(compact(['data','refresh']), $route->data, $route->associativesMatches));
+                        }
+                    }
+                }
+            }
+        }
+
         if(self::$default != false){//if there is a default and no matches
             redirect(url(self::$default));//redirect to the default path
             return false;
@@ -89,6 +118,13 @@ class Router{
      */
     static function setAjax($url){
         self::$ajaxurl = $url;
+    }
+
+    /**
+     * @return null
+     */
+    static function setAmp($path){
+        self::$amp = $path;
     }
 
     /**

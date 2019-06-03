@@ -6,9 +6,10 @@ Router::get('/home', [ 'view' => 'home', 'script' => 'MainController@home', 'rel
     'title' => 'Homepage'
 ]]);
 
-Router::get('/template', ['view' => 'template']);
+Router::get('/template', ['view' => 'template', 'amp' => false]);
 
 Router::default_path('/home');
 Router::setAjax('/load');
+Router::setAmp('/amp');
 
 ?>
