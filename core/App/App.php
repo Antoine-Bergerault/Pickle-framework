@@ -9,6 +9,7 @@ class App extends Session{
 
     use UserManagement;
     use SessionChecker;
+    use StyleManagement;
 
     static $user = false;//variable to store the user
     static $url = null;//variable to store the url
