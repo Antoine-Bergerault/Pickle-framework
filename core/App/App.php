@@ -159,11 +159,9 @@ class App extends Session{
                 $env = ENV;
             }
             include __DIR__.'/Builders/AppBuilder.php';
-            if($env == 'DEV'){
-                $Builder = new \Pickle\Engine\Builder\AppBuilder();
-                $Builder->loadEnvironnement($env);
-                $Builder->print();
-            }
+            $Builder = new \Pickle\Engine\Builder\AppBuilder();
+            $Builder->loadEnvironnement($env);
+            $Builder->print();
         }
     }
 

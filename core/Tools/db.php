@@ -20,12 +20,20 @@ class DB{
     public function query($sql, $data = array()){
         $req = $this->db->prepare($sql);
         $req->execute($data);
-        if(ENV == 'DEV'){
+        //if(ENV == 'DEV'){
             if(!isset($GLOBALS['Pickle-DB-QueryCount'])){
                 $GLOBALS['Pickle-DB-QueryCount'] = 0;
             }
+            if(!isset($GLOBALS['Pickle-DB-Queries'])){
+                $GLOBALS['Pickle-DB-Queries'] = [];
+            }
+            if(!isset($GLOBALS['Pickle-DB-Params'])){
+                $GLOBALS['Pickle-DB-Params'] = [];
+            }
             $GLOBALS['Pickle-DB-QueryCount'] = $GLOBALS['Pickle-DB-QueryCount'] + 1;
-        }
+            $GLOBALS['Pickle-DB-Queries'][] = $sql;
+            $GLOBALS['Pickle-DB-Params'][] = $data;
+        //}
         return $req->fetchAll(\PDO::FETCH_OBJ);
     }
     public function total($param){
