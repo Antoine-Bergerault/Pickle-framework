@@ -20,6 +20,12 @@ trait StyleManagement{
         if($color == false){
             $color = $_SESSION['colors'][\slugify($name)] ?? false;
         }
+        if(!isset($GLOBALS['Pickle-Used-Colors'])){
+            $GLOBALS['Pickle-Used-Colors'] = [];
+        }
+        if(!isset($GLOBALS['Pickle-Used-Colors'][$name])){
+            $GLOBALS['Pickle-Used-Colors'][$name] = $color;
+        }
         return $color == false ? '' : $color;
     }
 
