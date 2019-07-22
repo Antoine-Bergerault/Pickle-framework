@@ -158,4 +158,16 @@ function standard_format($date){
     return date_format(new DateTime($date), 'jS F Y');
 }
 
+function between_dates($begin, $end, $year = false){
+    $now = new DateTime();
+    if(!$year){
+        $begin = date("Y") . '-' . $begin;
+        $end = date("Y") . '-' . $end;
+    }
+    $startdate = new DateTime($begin);//"2014-11-20"
+    $enddate = new DateTime($end);//"2015-01-20"
+
+    return $startdate <= $now && $now <= $enddate;
+}
+
 ?>
