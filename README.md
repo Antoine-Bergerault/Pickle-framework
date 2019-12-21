@@ -1,4 +1,6 @@
 # Pickle framework
+[![Build Status](https://travis-ci.com/Antoine-Bergerault/Pickle-framework.svg?branch=master)](https://travis-ci.com/Antoine-Bergerault/Pickle-framework)
+
 documentation : https://antoine-bergerault.github.io/pickle-doc/index.html
 
 ## Requirements
