@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<phpunit colors="true">
+<phpunit colors="true" bootstrap="./autoload.php">
     <testsuite name="My tests">
         <directory>./tests</directory>
     </testsuite>
     <filter>
         <whitelist proceessUncoveredFromWhitelist="true">
-            <directory suffic=".php">Middlewares/</directory>
+            <directory suffic=".php">./src</directory>
         </whitelist>
     </filter>
+    <php>
+        <server name='HTTP_HOST' value='http://localhost/pickle' />
+        <server name='REQUEST_URI' value='/' />
+        <server name='HTTPS' value='no' />
+        <server name='REQUEST_METHOD' value='GET' />
+    </php>
 </phpunit>

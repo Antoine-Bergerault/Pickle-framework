@@ -1,5 +1,9 @@
 <?php
 
+if(!defined('ROOT')){
+    define('ROOT', __DIR__);
+}
+
 require('core/Tools/config.php');//load the configuration
 require('core/App/App.php');//load app
 require('core/App/Cache.php');//load cache
