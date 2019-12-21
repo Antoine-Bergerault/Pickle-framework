@@ -93,7 +93,7 @@ class App extends Session{
      */
     static function middleware($name){
         if(!isset(self::$middlewares[$name])){
-            require_once(__DIR__.'/../Middlewares/'.ucfirst($name).'Middleware.php');
+            require_once(ROOT.'/src/Middlewares/'.ucfirst($name).'Middleware.php');
             $name = ucfirst($name).'Middleware';
             $middleware = new $name();
             self::$middlewares[$name] = $middleware;
