@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
+    'Yalesov\\Yaml' => array($vendorDir . '/heartsentwined/yaml/src'),
+    'Yalesov\\ArgValidator' => array($vendorDir . '/yalesov/arg-validator/src'),
 );

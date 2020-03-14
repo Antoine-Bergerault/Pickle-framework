@@ -3,6 +3,7 @@
 
 define('ROOT', dirname(__DIR__));
 
+use Yalesov\Yaml\Yaml;
 use \Pickle\Engine\App;
 use \Pickle\Engine\Router;
 
@@ -17,6 +18,19 @@ if(isset($_GET['picklerewriteurl'])){//set the url
 date_default_timezone_set('UTC');
 
 require(ROOT.'/autoload.php');
+
+require ROOT.'/vendor/autoload.php';
+
+$settings = Yaml::parse(file_get_contents(ROOT.'/environment.yml'));
+
+$GLOBALS['settings'] = $settings;
+
+if (($_SERVER["HTTPS"] ?? 'off') != "on") {
+    header("HTTP/1.1 301 Moved Permanently");
+    $site = $settings['site'];
+    header("Location: https://$site$url");
+    exit();
+}
 
 if(ENV == 'PROD'){
     register_shutdown_function('fatal_handler');

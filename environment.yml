@@ -1,0 +1,6 @@
+site : github.local/coursonline
+
+host : localhost
+username : root
+password : ''
+database : coursonline

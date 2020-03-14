@@ -3,10 +3,10 @@ namespace Pickle\Tools;
 
 class Config{
 
-    static $host = "localhost";//host name
-    static $username = "root";//username
-    static $password = "";//password
-    static $database = "pickle";//name of the database
+    static $host = null;//host name
+    static $username = null;//username
+    static $password = null;//password
+    static $database = null;//name of the database
 
     static $CacheDirectory = "/temp";//the directory where the cache will be stored
 
@@ -17,3 +17,10 @@ class Config{
     static $website = 'localhost/pickle';
 
 }
+
+Config::$host = $GLOBALS['settings']['host'] ?? 'localhost';
+Config::$username = $GLOBALS['settings']['username'] ?? 'root';
+Config::$password = $GLOBALS['settings']['password'] ?? '';
+Config::$database = $GLOBALS['settings']['database'] ?? 'pickle';
+
+Config::$website = $GLOBALS['settings']['site'] ?? 'localhost/pickle';
