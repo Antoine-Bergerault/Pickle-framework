@@ -1,6 +1,6 @@
-site : github.local/coursonline
+site : github.local/pickle
 
 host : localhost
 username : root
 password : ''
-database : coursonline
+database : pickle
